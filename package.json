@@ -9,6 +9,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "http-server:browser": "npx http-server ./dist/angular-v17-pwa/browser --log-ip true -S true -c-1 --cert pwa.test+3.pem --key pwa.test+3-key.pem -P http://localhost:9000"
+    "full": "ng serve",
+    "backend": "npx json-server db.json5",
+    "server": "node server.mjs"
   },
   "private": true,
   "dependencies": {

@@ -1,0 +1,24 @@
+{
+  "posts": [
+    { "id": 1, "title": "a title", "views": 100 },
+    { "id": 2, "title": "another title a", "views": 200 },
+    { "id": 3, "title": "another title b", "views": 300 },
+    { "id": 4, "title": "another title c", "views": 250 },
+    { "id": 5, "title": "another title d", "views": 400 },
+    { "id": 6, "title": "another title e", "views": 200 },
+    { "id": 7, "title": "another title f", "views": 500 },
+    { "id": 8, "title": "another title g", "views": 200 },
+    { "id": 9, "title": "another title h", "views": 250 },
+    { "id": 10, "title": "another title i", "views": 800 },
+    { "id": 11, "title": "another title j", "views": 50 }
+  ],
+  "comments": [
+    { "id": 1, "text": "a comment about post 1", "postId": "a11" },
+    { "id": 2, "text": "another comment about post 1", "postId": "v22" },
+    { "id": 3, "text": "another comment about post 2", "postId": "c33" },
+    { "id": 4, "text": "another comment about post 3", "postId": "d44" }
+  ],
+  "profile": {
+    "email": "thoschulte@gmail.com"
+  }
+}
