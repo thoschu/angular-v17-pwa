@@ -1,7 +1,19 @@
 {
   "$schema": "./node_modules/@angular/service-worker/config/schema.json",
   "index": "/index.html",
-  "dataGroups": [],
+  "dataGroups": [
+    {
+      "name": "lorem-ipsum",
+      "urls": [
+        "/lorem-ipsum"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxAge": "1d",
+        "maxSize": 100
+      }
+    }
+  ],
   "assetGroups": [
     {
       "name": "app",

@@ -1,8 +1,16 @@
 <header>{{title}}</header>
-<aside></aside>
 <main class="main">
   <button [disabled]="disabled" (click)="checkForUpdate()">UPDATE</button>
   <div #container class="content"></div>
 </main>
-<footer></footer>
+<footer>
+  <p>{{version}}</p>
+</footer>
+<aside>
+  <ul>
+    @for (loremIpsum of loremIpsum$ | async; track loremIpsum) {
+      <li>{{ loremIpsum }}</li>
+    }
+  </ul>
+</aside>
 <router-outlet />

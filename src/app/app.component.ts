@@ -2,33 +2,48 @@ import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } fr
 import { RouterOutlet } from '@angular/router';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 
-import { io } from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
+
+import {AppService} from './app.service';
+import {Observable} from "rxjs";
+import {AsyncPipe} from "@angular/common";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, AsyncPipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements AfterViewInit, OnInit {
-  protected readonly title: string = 'angular-v17-pwa 25';
   protected disabled: boolean = true;
+  protected readonly title: string = 'angular-v17-pwa';
+  protected readonly version: string = 'v36';
+  protected readonly loremIpsum$: Observable<string[]>;
 
   @ViewChild('container', { static: false, read: ElementRef })
   private readonly container?: ElementRef<HTMLDivElement>;
 
-  constructor(private readonly renderer2: Renderer2, private readonly swUpdate: SwUpdate) {
-    const socket = io(`http://localhost:3003`);
+  constructor(
+    private readonly renderer2: Renderer2,
+    private readonly swUpdate: SwUpdate,
+    private readonly appService: AppService
+  ) {
+    // const socket: Socket = io();
+    //
+    // socket.on('connect', (): void => {
+    //   console.log(socket.id);
+    // });
+    //
+    // socket.on('disconnect', (): void => {
+    //   console.log(socket.id);
+    // });
+    //
+    // socket.on('data', (payload): void => {
+    //   console.info(payload);
+    // });
 
-    socket.on('connect', () => {
-      console.log(socket.id);
-    });
-
-    socket.on('disconnect', () => {
-      console.log(socket.id);
-    });
-
+    this.loremIpsum$ = this.appService.loremIpsum$;
   }
 
   protected checkForUpdate(): void {
