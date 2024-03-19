@@ -1,7 +1,15 @@
 import express from 'express';
+import { createServer } from 'http';
+import { Server } from "socket.io";
 
-const app = express();
 const port = 3003;
+const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer, { /* options */ });
+
+io.on("connection", (socket) => {
+  // ...
+});
 
 app.get('/', (req, res) => {
   const html = `
@@ -50,6 +58,6 @@ app.get('/delay', async (req, res) => {
     }, duration);
 });
 
-app.listen(port, () => {
+httpServer.listen(port, () => {
     console.log(`Server is running on port http://localhost:${port}/delay?duration=0&status=200`);
 });
