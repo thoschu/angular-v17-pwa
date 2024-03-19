@@ -1,12 +1,11 @@
+import { AsyncPipe } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
-
+import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 
-import {AppService} from './app.service';
-import {Observable} from "rxjs";
-import {AsyncPipe} from "@angular/common";
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
