@@ -2,6 +2,8 @@ import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } fr
 import { RouterOutlet } from '@angular/router';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 
+import { io } from 'socket.io-client';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -16,7 +18,18 @@ export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild('container', { static: false, read: ElementRef })
   private readonly container?: ElementRef<HTMLDivElement>;
 
-  constructor(private readonly renderer2: Renderer2, private readonly swUpdate: SwUpdate) {}
+  constructor(private readonly renderer2: Renderer2, private readonly swUpdate: SwUpdate) {
+    const socket = io(`http://localhost:3003`);
+
+    socket.on('connect', () => {
+      console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+    });
+
+    socket.on('disconnect', () => {
+      console.log(socket.id); // undefined
+    });
+
+  }
 
   protected checkForUpdate(): void {
     window.location.reload();

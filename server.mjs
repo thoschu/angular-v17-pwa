@@ -1,14 +1,19 @@
 import express from 'express';
 import { createServer } from 'http';
-import { Server } from "socket.io";
+import { Server } from 'socket.io';
 
 const port = 3003;
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer, { /* options */ });
+const io = new Server(httpServer, {
+  cors: {
+    origin: 'http://localhost:4200',
+    methods: ['GET', 'POST']
+  }
+});
 
-io.on("connection", (socket) => {
-  // ...
+io.on('connection', (socket) => {
+  console.log(socket.id);
 });
 
 app.get('/', (req, res) => {
