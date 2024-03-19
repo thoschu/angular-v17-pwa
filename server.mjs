@@ -3,6 +3,28 @@ import express from 'express';
 const app = express();
 const port = 3003;
 
+app.get('/', (req, res) => {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+        <body>
+          <h1>Examples:</h1>
+          <p>
+            <a href="http://localhost:3003/delay?duration=0&status=200" target="_blank">
+                http://localhost:3003/delay?duration=0&status=200
+            </a>
+          </p>
+          <p>
+            <a href="http://localhost:3003/lorem-ipsum" target="_blank">
+                http://localhost:3003/lorem-ipsum
+            </a>
+          </p>
+        </body>
+    </html>`;
+
+  res.status(200).send(html);
+});
+
 app.get('/lorem-ipsum', (req, res) => {
     const text = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam zerat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit zamet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
     const list = text.split(' ');
