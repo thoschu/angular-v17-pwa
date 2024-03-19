@@ -1,21 +1,21 @@
 <header>{{title}}</header>
 <main class="main">
   <button [disabled]="disabled" (click)="checkForUpdate()">UPDATE</button>
-  <div #container class="content"></div>
+  <div #container class="typewriter"></div>
 </main>
-<footer>
-  <p>{{version}}</p>
-</footer>
 <aside>
-  <ul>
+  <ul class="typewriter">
     @for (loremIpsum of loremIpsum$ | async; track loremIpsum) {
       <li>{{ loremIpsum }}</li>
     }
   </ul>
-  <ol>
+  <ol class="typewriter">
     @for (times of times$ | async; track times) {
       <li>{{ times }}</li>
     }
   </ol>
 </aside>
+<footer>
+  <p>{{version}} © 2024</p>
+</footer>
 <router-outlet />

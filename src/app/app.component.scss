@@ -1,5 +1,36 @@
+/* The typing effect */
+@keyframes typing {
+  0% { width: 0; }
+  50% { width: 100%; } /* Erreicht 100% bei 50% der Zeit */
+  60%, 90% { width: 100%; } /* Bleibt von 60% bis 90% der Zeit unverändert */
+  100% { width: 0; } /* Optional: Rücksetzen auf 0% für einen Schleifeneffekt */
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  0%, 20% { border-color: transparent; }
+  25%, 50% { border-color: orange; } /* Cursor blinkt */
+  50.01%, 100% { border-color: transparent; } /* Längere Pause, bevor es wiederholt wird */
+}
+
+.typewriter * {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: typing 13s steps(40, end) infinite, blink-caret 7s step-end infinite;
+  animation-timing-function: cubic-bezier(.14, .75, .2, 1.01);
+}
+
 :host {
   aside {
-    background-color: darkgray;
+    background-color: transparent;
+
+    ol {
+      font-family: "Flow Rounded", system-ui;
+      font-weight: 400;
+      font-style: normal;
+    }
   }
 }

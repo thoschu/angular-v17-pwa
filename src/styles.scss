@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Flow+Rounded&family=Madimi+One&display=swap');
+
+body {
+  background-image: url('./assets/images/dashboard.gif');
+  background-color: transparent;
+  backdrop-filter: blur(0);
+  color: white;
+  font-family: 'Madimi One', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
