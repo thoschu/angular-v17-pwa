@@ -34,6 +34,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Content
 
-| Tag name  | Branch name                            |
-|-----------|----------------------------------------|
-| 1         | main                                   |
+| Tag name | Branch name |
+|----------|-------------|
+| 1        | main        |
+| 2        | app-shell   |
