@@ -7,9 +7,13 @@ import { map, Observable } from 'rxjs';
 })
 export class AppService {
   public readonly loremIpsum$: Observable<string[]>;
+  public readonly times$: Observable<string[]>;
 
   constructor(readonly httpClient: HttpClient) {
     this.loremIpsum$ = httpClient.get<Record<'payload', string[]>>('/lorem-ipsum')
+      .pipe(map<Record<'payload', string[]>, string[]>((val: Record<'payload', string[]>) => val.payload));
+
+    this.times$ = httpClient.get<Record<'payload', string[]>>('/times?amount=11')
       .pipe(map<Record<'payload', string[]>, string[]>((val: Record<'payload', string[]>) => val.payload));
   }
 }

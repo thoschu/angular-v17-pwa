@@ -17,8 +17,9 @@ import { AppService } from './app.service';
 export class AppComponent implements AfterViewInit, OnInit {
   protected disabled: boolean = true;
   protected readonly title: string = 'angular-v17-pwa';
-  protected readonly version: string = 'v36';
+  protected readonly version: string = 'v40';
   protected readonly loremIpsum$: Observable<string[]>;
+  protected readonly times$: Observable<string[]>;
 
   @ViewChild('container', { static: false, read: ElementRef })
   private readonly container?: ElementRef<HTMLDivElement>;
@@ -43,6 +44,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     // });
 
     this.loremIpsum$ = this.appService.loremIpsum$;
+    this.times$ = this.appService.times$
   }
 
   protected checkForUpdate(): void {

@@ -12,5 +12,10 @@
       <li>{{ loremIpsum }}</li>
     }
   </ul>
+  <ol>
+    @for (times of times$ | async; track times) {
+      <li>{{ times }}</li>
+    }
+  </ol>
 </aside>
 <router-outlet />

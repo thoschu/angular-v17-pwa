@@ -1,5 +1,6 @@
 import express from 'express';
 import { createServer } from 'http';
+import {identity, inc, map, repeat, times} from 'ramda';
 import { Server } from 'socket.io';
 
 const port = 3003;
@@ -53,6 +54,18 @@ app.get('/', (req, res) => {
     </html>`;
 
   res.status(200).send(html);
+});
+
+app.get('/times', (req, res) => {
+  const amount = req.query.amount ?? 0;
+  let payload = repeat('.', amount);
+  payload = payload.map((ele, idx) => ele.repeat(inc(idx)));
+
+  const myTimeout = setTimeout(() => {
+    res.status(200).jsonp({ payload });
+
+    clearTimeout(myTimeout);
+  }, 1000);
 });
 
 app.get('/lorem-ipsum', (req, res) => {

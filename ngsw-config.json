@@ -12,6 +12,18 @@
         "maxAge": "1d",
         "maxSize": 100
       }
+    },
+    {
+      "name": "times",
+      "urls": [
+        "/times"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "timeout": "5s",
+        "maxAge": "1d",
+        "maxSize": 100
+      }
     }
   ],
   "assetGroups": [
