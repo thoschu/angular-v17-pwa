@@ -14,12 +14,29 @@ const io = new Server(httpServer, {
 
 io.on('connection', (socket) => {
   console.log(socket.id);
+  socket.emit('data', 'hello world');
 });
 
 app.get('/', (req, res) => {
   const html = `
     <!DOCTYPE html>
     <html>
+        <head>
+            <title>Examples</title>
+            <link rel="icon" type="image/x-icon" href="//www.thomas-schulte.de/html/images/favicon.ico">
+            <script src="/socket.io/socket.io.js"></script>
+            <script>
+              const socket = io();
+
+              socket.on('connect', () => {
+                console.log(socket.id);
+              });
+
+              socket.on('data', payload => {
+                console.info(payload);
+              });
+            </script>
+        </head>
         <body>
           <h1>Examples:</h1>
           <p>
