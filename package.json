@@ -2,14 +2,14 @@
   "name": "angular-v17-pwa",
   "version": "0.0.0",
   "scripts": {
+    "*": "npx concurrently \"npm run server\" 'npm run http-server:browser'",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "http-server:browser": "npx http-server ./dist/angular-v17-pwa/browser --log-ip true -S true -c-1 --cert pwa.test+3.pem --key pwa.test+3-key.pem -P http://localhost:9000"
-    "full": "ng serve",
+    "http-server:browser": "npx http-server ./dist/angular-v17-pwa/browser --log-ip true -S true -c-1 --cert pwa.test+3.pem --key pwa.test+3-key.pem -P http://localhost:3003",
     "backend": "npx json-server db.json5",
     "server": "node server.mjs"
   },
