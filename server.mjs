@@ -2,6 +2,7 @@ import express from 'express';
 import { createServer } from 'http';
 import { identity, inc, map, repeat, times } from 'ramda';
 import { Server } from 'socket.io';
+import webpush from 'web-push';
 
 const port = 3003;
 const app = express();
@@ -12,6 +13,8 @@ const io = new Server(httpServer, {
     methods: ['GET', 'POST']
   }
 });
+
+const VAPID_KEYS = webpush.generateVAPIDKeys();
 
 io.on('connection', (socket) => {
   console.log(socket.id);
@@ -94,5 +97,6 @@ app.get('/delay', async (req, res) => {
 });
 
 httpServer.listen(port, () => {
-    console.log(`Server is running on port http://localhost:${port}/delay?duration=0&status=200`);
+  console.log(`Server is running on port http://0.0.0.0:${port}/delay?duration=0&status=200`);
+  console.log(VAPID_KEYS);
 });

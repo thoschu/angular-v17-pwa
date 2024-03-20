@@ -2,8 +2,10 @@ import { AsyncPipe } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {SwPush, SwUpdate, VersionEvent} from '@angular/service-worker';
-import { Observable } from 'rxjs';
+import {catchError, from, Observable, throwError} from 'rxjs';
 import { io, Socket } from 'socket.io-client';
+
+import { VapidKeys } from 'web-push';
 
 import { AppService } from './app.service';
 
@@ -15,9 +17,10 @@ import { AppService } from './app.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements AfterViewInit, OnInit {
+  private static readonly VAPID_PUBLIC_KEY: string = 'BJOBBq_yN7IvtfunHIEbfANiUIPvGdBx7SRYLXENDaFmfKEeUSeEfpHQgir0MXW5QqQByFD66SjydOJLA3qx94U';
   protected disabled: boolean = true;
   protected readonly title: string = 'angular-v17-pwa';
-  protected readonly version: string = 'v57';
+  protected readonly version: string = 'v63';
   protected readonly loremIpsum$: Observable<string[]>;
   protected readonly times$: Observable<string[]>;
 
@@ -55,13 +58,16 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   protected subscribeToNotifications(): void {
-    this.swPush.requestSubscription({
-      serverPublicKey: 'BFL3o6'
-    });
+    from<Promise<PushSubscription>>(this.swPush.requestSubscription({
+      serverPublicKey: AppComponent.VAPID_PUBLIC_KEY
+    }))
+    .pipe(catchError<PushSubscription, Observable<never>>(throwError))
+    .subscribe(console.log);
   }
 
   ngAfterViewInit(): void {
     console.log(this.container);
+    console.info(AppComponent.VAPID_PUBLIC_KEY);
   }
 
   ngOnInit(): void {
