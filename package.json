@@ -11,7 +11,8 @@
     "test": "ng test",
     "http-server:browser": "npx http-server ./dist/angular-v17-pwa/browser --cors true --log-ip true -S true -c-1 --cert pwa.test+3.pem --key pwa.test+3-key.pem -P http://localhost:3003",
     "backend": "npx json-server db.json5",
-    "server": "node server.mjs"
+    "server": "node server.mjs",
+    "generate:vapid-keys": "web-push generate-vapid-keys --json"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +31,7 @@
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
     "tslib": "^2.3.0",
+    "web-push": "^3.6.7",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {

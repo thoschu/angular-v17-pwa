@@ -1,6 +1,6 @@
 import express from 'express';
 import { createServer } from 'http';
-import {identity, inc, map, repeat, times} from 'ramda';
+import { identity, inc, map, repeat, times } from 'ramda';
 import { Server } from 'socket.io';
 
 const port = 3003;

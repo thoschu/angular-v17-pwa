@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SwUpdate, VersionEvent } from '@angular/service-worker';
+import {SwPush, SwUpdate, VersionEvent} from '@angular/service-worker';
 import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 
@@ -27,6 +27,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   constructor(
     private readonly renderer2: Renderer2,
     private readonly swUpdate: SwUpdate,
+    private readonly swPush: SwPush,
     private readonly appService: AppService
   ) {
     // const socket: Socket = io();
@@ -51,6 +52,12 @@ export class AppComponent implements AfterViewInit, OnInit {
     window.location.reload();
 
     this.disabled = true;
+  }
+
+  protected subscribeToNotifications(): void {
+    this.swPush.requestSubscription({
+      serverPublicKey: 'BFL3o6'
+    });
   }
 
   ngAfterViewInit(): void {

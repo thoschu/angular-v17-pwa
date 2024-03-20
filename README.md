@@ -32,6 +32,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
   `npx ng add @angular/pwa`
 
+  `ng g app-shell`
+
+  `https://datatracker.ietf.org/doc/html/rfc8292`
+
 ## Content
 
 | Tag name | Branch name        |
