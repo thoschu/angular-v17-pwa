@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {SwPush, SwUpdate, VersionEvent} from '@angular/service-worker';
-import {catchError, from, Observable, throwError} from 'rxjs';
+import {catchError, from, noop, Observable, throwError} from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 
 import { VapidKeys } from 'web-push';
@@ -20,7 +20,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   private static readonly VAPID_PUBLIC_KEY: string = 'BJOBBq_yN7IvtfunHIEbfANiUIPvGdBx7SRYLXENDaFmfKEeUSeEfpHQgir0MXW5QqQByFD66SjydOJLA3qx94U';
   protected disabled: boolean = true;
   protected readonly title: string = 'angular-v17-pwa';
-  protected readonly version: string = 'v63';
+  protected readonly version: string = 'v71';
   protected readonly loremIpsum$: Observable<string[]>;
   protected readonly times$: Observable<string[]>;
 
@@ -62,7 +62,14 @@ export class AppComponent implements AfterViewInit, OnInit {
       serverPublicKey: AppComponent.VAPID_PUBLIC_KEY
     }))
     .pipe(catchError<PushSubscription, Observable<never>>(throwError))
-    .subscribe(console.log);
+    .subscribe((pushSubscription: PushSubscription): void => {
+      this.appService.addPushSubscription(pushSubscription)
+        .subscribe(
+          console.log,
+          console.error,
+          () => console.info('chrome://settings/content/notifications')
+        );
+    });
   }
 
   ngAfterViewInit(): void {

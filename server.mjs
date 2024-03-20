@@ -6,6 +6,7 @@ import webpush from 'web-push';
 
 const port = 3003;
 const app = express();
+
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
@@ -15,6 +16,8 @@ const io = new Server(httpServer, {
 });
 
 const VAPID_KEYS = webpush.generateVAPIDKeys();
+
+app.use(express.json());
 
 io.on('connection', (socket) => {
   console.log(socket.id);
@@ -96,7 +99,19 @@ app.get('/delay', async (req, res) => {
     }, duration);
 });
 
+let set = new Set();
+app.post('/push-subscription', (req, res) => {
+  const body = req.body;
+
+  set.add(body);
+
+  console.log(set);
+
+  res.status(201).send({
+    message: 'PushSubscription was added to the list successfully.'
+  });
+});
+
 httpServer.listen(port, () => {
   console.log(`Server is running on port http://0.0.0.0:${port}/delay?duration=0&status=200`);
-  console.log(VAPID_KEYS);
 });

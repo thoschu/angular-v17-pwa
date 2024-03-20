@@ -24,6 +24,18 @@
         "maxAge": "1d",
         "maxSize": 100
       }
+    },
+    {
+      "name": "push-subscription",
+      "urls": [
+        "/push-subscription"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "timeout": "5s",
+        "maxAge": "1d",
+        "maxSize": 100
+      }
     }
   ],
   "assetGroups": [

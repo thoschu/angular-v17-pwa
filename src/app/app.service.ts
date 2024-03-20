@@ -16,4 +16,8 @@ export class AppService {
     this.times$ = httpClient.get<Record<'payload', string[]>>('/times?amount=11')
       .pipe(map<Record<'payload', string[]>, string[]>((val: Record<'payload', string[]>) => val.payload));
   }
+
+  public addPushSubscription(pushSubscription: PushSubscription): Observable<PushSubscription> {
+    return this.httpClient.post<PushSubscription>('/push-subscription', pushSubscription);
+  }
 }
