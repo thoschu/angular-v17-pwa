@@ -28,20 +28,25 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Further information
 
-`https://github.com/FiloSottile/mkcert`
-
-`npx ng add @angular/pwa`
-
-`ng g app-shell`
-
-`https://datatracker.ietf.org/doc/html/rfc8292`
-
-- Web Workers, Service Workers, and Worklets are powerful concepts that help improve the performance of web applications. Web Workers enable concurrent processing of tasks, Service Workers enable offline functionality and push notifications, and Worklets enable custom animations and effects.
+- `https://github.com/FiloSottile/mkcert`
+- `npx ng add @angular/pwa`
+- `ng g app-shell`
+- `https://datatracker.ietf.org/doc/html/rfc8292`
+- Web Workers, Service Workers, and Worklets are powerful concepts that help improve the performance of web applications. 
+Web Workers enable concurrent processing of tasks, Service Workers enable offline functionality and push notifications (e.g. intercepts http calls), 
+and Worklets enable custom animations and effects.
+- https://angular.io/guide/service-worker-getting-started
 
 ## Content
+
+- bar
 
 | Tag name | Branch name        |
 |----------|--------------------|
 | 1        | main               |
 | 2        | app-shell          |
 | 3        | push-notifications |
+
+## Images
+
+![Service Worker Instance](./assets/sw-1.png)

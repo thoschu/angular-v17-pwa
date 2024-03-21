@@ -1,0 +1,55 @@
+{
+  "/api": {
+    "target": "http://localhost:3000",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  },
+  "/posts": {
+    "target": "http://localhost:3000/posts",
+    "secure": false,
+    "pathRewrite": {
+      "^/posts": ""
+    }
+  },
+  "/comments": {
+    "target": "http://localhost:3000/comments",
+    "secure": false,
+    "pathRewrite": {
+      "^/comments": ""
+    }
+  },
+  "/profile": {
+    "target": "http://localhost:3000/profile",
+    "secure": false,
+    "pathRewrite": {
+      "^/profile": ""
+    }
+  },
+  "/error": {
+    "target": "https://user1710514399156.requestly.tech/error500?",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/error": ""
+    }
+  },
+  "/delay": {
+    "target": "http://localhost:3003",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/lorem-ipsum": {
+    "target": "http://localhost:3003",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/times": {
+    "target": "http://localhost:3003",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
