@@ -36,7 +36,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 `https://datatracker.ietf.org/doc/html/rfc8292`
 
-Web Workers, Service Workers, and Worklets are powerful concepts that help improve the performance of web applications. Web Workers enable concurrent processing of tasks, Service Workers enable offline functionality and push notifications, and Worklets enable custom animations and effects.
+- Web Workers, Service Workers, and Worklets are powerful concepts that help improve the performance of web applications. Web Workers enable concurrent processing of tasks, Service Workers enable offline functionality and push notifications, and Worklets enable custom animations and effects.
 
 ## Content
 
