@@ -29,13 +29,14 @@
               "src/favicon.ico",
               "src/assets",
               "src/manifest.webmanifest",
-              "src/service-worker-register.js",
               "src/service-worker.js"
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/service-worker-register.js"
+            ]
           },
           "configurations": {
             "production": {
