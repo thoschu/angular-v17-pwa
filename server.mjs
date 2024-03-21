@@ -15,7 +15,17 @@ const io = new Server(httpServer, {
   }
 });
 
-const VAPID_KEYS = webpush.generateVAPIDKeys();
+const vapidKeys = webpush.generateVAPIDKeys();
+
+// Firebase Cloud Messaging
+// GCM API key
+// webpush.setGCMAPIKey('<Your GCM API Key Here>');
+
+webpush.setVapidDetails(
+  'mailto:thoschulte@gmail.com',
+  vapidKeys.publicKey,
+  vapidKeys.privateKey
+);
 
 app.use(express.json());
 
@@ -99,19 +109,66 @@ app.get('/delay', async (req, res) => {
     }, duration);
 });
 
-let set = new Set();
+let list = [];
 app.post('/push-subscription', (req, res) => {
   const body = req.body;
 
-  set.add(body);
-
-  console.log(set);
+  list.push(body);
 
   res.status(201).send({
     message: 'PushSubscription was added to the list successfully.'
   });
 });
 
+app.post('/do-notification', (req, res) => {
+  const body = req.body;
+
+  const notificationPayload = {
+    notification: {
+      title: 'Push Notification',
+      body,
+      icon: 'https://www.thomas-schulte.de/html/images/favicon.ico',
+      vibrate: [100, 50, 100],
+      data: {
+        dateOfArrival: Date.now(),
+        primaryKey: 1
+      },
+      actions: [
+        {
+          action: 'explore',
+          title: 'Explore this new world',
+          icon: 'https://www.thomas-schulte.de/html/images/favicon.ico'
+        }, {
+          action: 'close',
+          title: 'Close',
+          icon: 'https://www.thomas-schulte.de/html/images/favicon.ico'
+        }
+      ]
+    }
+  };
+
+  Promise.all(list.map((sub) => {
+    console.log(sub);
+    return webpush.sendNotification(sub, JSON.stringify(notificationPayload)).then((sendResult) => {
+      console.log(sendResult);
+    });
+  }))
+    .then((result) => {
+      res.status(200).send({
+        message: 'Notification successful.',
+        result
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send({
+        message: 'PushSubscription was not added to the list.',
+        err
+      });
+    });
+});
+
 httpServer.listen(port, () => {
   console.log(`Server is running on port http://0.0.0.0:${port}/delay?duration=0&status=200`);
+  console.log(vapidKeys);
 });

@@ -26,9 +26,10 @@
       }
     },
     {
-      "name": "push-subscription",
+      "name": "notifications",
       "urls": [
-        "/push-subscription"
+        "/push-subscription",
+        "/do-notification"
       ],
       "cacheConfig": {
         "strategy": "freshness",

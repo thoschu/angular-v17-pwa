@@ -17,10 +17,10 @@ import { AppService } from './app.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements AfterViewInit, OnInit {
-  private static readonly VAPID_PUBLIC_KEY: string = 'BJOBBq_yN7IvtfunHIEbfANiUIPvGdBx7SRYLXENDaFmfKEeUSeEfpHQgir0MXW5QqQByFD66SjydOJLA3qx94U';
+  private static readonly VAPID_PUBLIC_KEY: string = 'BDZP1mrw8LxYOPTUWs0qd5gTpukkcfBtErJ4GvnzmUv_A0vThcjeNKcqvNjxWhhviL94ue3YIcQlNMUGO7nhm4o';
   protected disabled: boolean = true;
   protected readonly title: string = 'angular-v17-pwa';
-  protected readonly version: string = 'v71';
+  protected readonly version: string = 'v82';
   protected readonly loremIpsum$: Observable<string[]>;
   protected readonly times$: Observable<string[]>;
 
@@ -70,6 +70,10 @@ export class AppComponent implements AfterViewInit, OnInit {
           () => console.info('chrome://settings/content/notifications')
         );
     });
+  }
+
+  protected send(): void {
+    this.appService.send('Hello, World!').subscribe(console.info);
   }
 
   ngAfterViewInit(): void {

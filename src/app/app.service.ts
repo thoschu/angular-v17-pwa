@@ -20,4 +20,8 @@ export class AppService {
   public addPushSubscription(pushSubscription: PushSubscription): Observable<PushSubscription> {
     return this.httpClient.post<PushSubscription>('/push-subscription', pushSubscription);
   }
+
+  public send(message: string): Observable<string> {
+    return this.httpClient.post<string>('/do-notification', message);
+  }
 }

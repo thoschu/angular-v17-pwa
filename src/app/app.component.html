@@ -1,6 +1,8 @@
 <header>{{title}}</header>
 <main class="main">
-  <button [disabled]="disabled" (click)="checkForUpdate()">UPDATE</button> || <button (click)="subscribeToNotifications()">SHOW</button>
+  <button [disabled]="disabled" (click)="checkForUpdate()">UPDATE</button> ||
+  <button (click)="subscribeToNotifications()">SHOW</button> ||
+  <button (click)="send()">SEND</button>
   <div #container class="typewriter"></div>
 </main>
 <aside>
@@ -16,6 +18,6 @@
   </ol>
 </aside>
 <footer>
-  <p>{{version}} © 2024</p>
+  <p>{{ version }} © 2024</p>
 </footer>
 <router-outlet />
