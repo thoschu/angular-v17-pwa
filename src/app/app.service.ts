@@ -21,7 +21,7 @@ export class AppService {
     return this.httpClient.post<PushSubscription>('/push-subscription', pushSubscription);
   }
 
-  public send(message: string): Observable<string> {
-    return this.httpClient.post<string>('/do-notification', message);
+  public send(message: Record<'message', unknown>): Observable<Record<'message', unknown>> {
+    return this.httpClient.post<Record<'message', unknown>>('/do-notification', message);
   }
 }

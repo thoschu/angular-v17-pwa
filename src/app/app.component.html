@@ -1,7 +1,7 @@
 <header>{{title}}</header>
 <main class="main">
-  <button [disabled]="disabled" (click)="checkForUpdate()">UPDATE</button> ||
-  <button (click)="subscribeToNotifications()">SHOW</button> ||
+  <button (click)="checkForUpdate()" [disabled]="disabled">UPDATE</button> ||
+  <button (click)="subscribeToNotifications()" [disabled]="subscription">SUBSCRIBE</button> ||
   <button (click)="send()">SEND</button>
   <div #container class="typewriter"></div>
 </main>

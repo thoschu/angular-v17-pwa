@@ -3,6 +3,7 @@ import { createServer } from 'http';
 import { identity, inc, map, repeat, times } from 'ramda';
 import { Server } from 'socket.io';
 import webpush from 'web-push';
+import 'dotenv/config';
 
 const port = 3003;
 const app = express();
@@ -15,11 +16,14 @@ const io = new Server(httpServer, {
   }
 });
 
-const vapidKeys = webpush.generateVAPIDKeys();
+// const vapidKeys = webpush.generateVAPIDKeys();
+const vapidKeys = {
+  publicKey: 'BO1GTa3kXP8unlB0ssLgS6N75qOlhOLoplx-C5aGMOCcQW96CuQT6gZ4n0wOe1a8LWLDJP2uVqGM3OtRvmg2xok',
+  privateKey: 'mlhAtg3N9jQyprN6U-a3QXdlIZjeOxdYeH26sEuer3I'
+};
 
-// Firebase Cloud Messaging
-// GCM API key
-// webpush.setGCMAPIKey('<Your GCM API Key Here>');
+// Firebase Cloud Messaging API key
+webpush.setGCMAPIKey(process.env.FCM_API_KEY);
 
 webpush.setVapidDetails(
   'mailto:thoschulte@gmail.com',
@@ -124,47 +128,31 @@ app.post('/do-notification', (req, res) => {
   const body = req.body;
 
   const notificationPayload = {
-    notification: {
-      title: 'Push Notification',
-      body,
-      icon: 'https://www.thomas-schulte.de/html/images/favicon.ico',
-      vibrate: [100, 50, 100],
-      data: {
-        dateOfArrival: Date.now(),
-        primaryKey: 1
+    "notification": {
+      "title": "Angular News",
+      "body": body.message,
+      "icon": "https://www.thomas-schulte.de/html/images/favicon.ico",
+      "vibrate": [100, 50, 100],
+      "data": {
+        "dateOfArrival": Date.now(),
+        "primaryKey": 1
       },
-      actions: [
-        {
-          action: 'explore',
-          title: 'Explore this new world',
-          icon: 'https://www.thomas-schulte.de/html/images/favicon.ico'
-        }, {
-          action: 'close',
-          title: 'Close',
-          icon: 'https://www.thomas-schulte.de/html/images/favicon.ico'
-        }
-      ]
+      "actions": [{
+        "action": "explore",
+        "title": "Go to the site"
+      }]
     }
   };
 
-  Promise.all(list.map((sub) => {
-    console.log(sub);
-    return webpush.sendNotification(sub, JSON.stringify(notificationPayload)).then((sendResult) => {
-      console.log(sendResult);
-    });
-  }))
+  Promise.all(list.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload) )))
     .then((result) => {
-      res.status(200).send({
-        message: 'Notification successful.',
-        result
-      });
+      console.log(result);
+
+      return res.status(200).json({message: 'Notification sent successfully.'});
     })
     .catch(err => {
-      console.error(err);
-      res.status(500).send({
-        message: 'PushSubscription was not added to the list.',
-        err
-      });
+      console.error("Error sending notification, reason: ", err);
+      res.sendStatus(500);
     });
 });
 

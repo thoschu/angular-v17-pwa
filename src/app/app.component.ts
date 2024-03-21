@@ -1,10 +1,10 @@
 import { AsyncPipe } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, OnDestroy, Renderer2, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {SwPush, SwUpdate, VersionEvent} from '@angular/service-worker';
-import {catchError, from, noop, Observable, throwError} from 'rxjs';
-import { io, Socket } from 'socket.io-client';
+import { SwPush, SwUpdate, VersionEvent } from '@angular/service-worker';
+import { catchError, from, noop, Observable, Subscription, throwError} from 'rxjs';
 
+import { io, Socket } from 'socket.io-client';
 import { VapidKeys } from 'web-push';
 
 import { AppService } from './app.service';
@@ -16,13 +16,14 @@ import { AppService } from './app.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements AfterViewInit, OnInit {
-  private static readonly VAPID_PUBLIC_KEY: string = 'BDZP1mrw8LxYOPTUWs0qd5gTpukkcfBtErJ4GvnzmUv_A0vThcjeNKcqvNjxWhhviL94ue3YIcQlNMUGO7nhm4o';
+export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
+  private static readonly VAPID_PUBLIC_KEY: string = 'BO1GTa3kXP8unlB0ssLgS6N75qOlhOLoplx-C5aGMOCcQW96CuQT6gZ4n0wOe1a8LWLDJP2uVqGM3OtRvmg2xok';
   protected disabled: boolean = true;
   protected readonly title: string = 'angular-v17-pwa';
-  protected readonly version: string = 'v82';
+  protected readonly version: string = 'v91';
   protected readonly loremIpsum$: Observable<string[]>;
   protected readonly times$: Observable<string[]>;
+  protected subscription: Subscription | null = null;
 
   @ViewChild('container', { static: false, read: ElementRef })
   private readonly container?: ElementRef<HTMLDivElement>;
@@ -58,7 +59,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   protected subscribeToNotifications(): void {
-    from<Promise<PushSubscription>>(this.swPush.requestSubscription({
+    this.subscription = from<Promise<PushSubscription>>(this.swPush.requestSubscription({
       serverPublicKey: AppComponent.VAPID_PUBLIC_KEY
     }))
     .pipe(catchError<PushSubscription, Observable<never>>(throwError))
@@ -73,7 +74,13 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   protected send(): void {
-    this.appService.send('Hello, World!').subscribe(console.info);
+    this.appService.send({message: 'Hello, World!'}).subscribe((response: Record<'message', any>): void => {
+      console.info(response);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 
   ngAfterViewInit(): void {
