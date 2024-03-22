@@ -1,11 +1,11 @@
 <header>{{title}}</header>
 <main class="main">
-  <button [disabled]="disabled" (click)="checkForUpdate()">UPDATE</button>
+  <button [disabled]="disabled" [ngStyle]="{'visibility': disabled ? 'hidden' : 'visible'}" (click)="checkForUpdate()">UPDATE</button>
   <div #container class="typewriter"></div>
 </main>
 <aside>
   <ul class="typewriter">
-    @for (loremIpsum of loremIpsum$ | async; track loremIpsum) {
+    @for (loremIpsum of (loremIpsum$ | async); track loremIpsum) {
       <li>{{ loremIpsum }}</li>
     }
   </ul>

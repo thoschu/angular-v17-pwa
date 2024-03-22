@@ -24,6 +24,10 @@
 }
 
 :host {
+  header {
+    visibility: hidden;
+  }
+
   aside {
     background-color: transparent;
 
@@ -32,5 +36,9 @@
       font-weight: 400;
       font-style: normal;
     }
+  }
+
+  footer {
+    text-align: center;
   }
 }

@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import {AsyncPipe, NgStyle} from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
@@ -10,14 +10,14 @@ import { AppService } from './app.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AsyncPipe],
+  imports: [RouterOutlet, AsyncPipe, NgStyle],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements AfterViewInit, OnInit {
   protected disabled: boolean = true;
   protected readonly title: string = 'angular-v17-pwa';
-  protected readonly version: string = 'v57';
+  protected readonly version: string = 'v.60';
   protected readonly loremIpsum$: Observable<string[]>;
   protected readonly times$: Observable<string[]>;
 
