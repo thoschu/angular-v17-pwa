@@ -29,7 +29,8 @@
               "src/favicon.ico",
               "src/assets",
               "src/manifest.webmanifest",
-              "src/service-worker.js"
+              "src/service-worker.js",
+              "src/offline.html"
             ],
             "styles": [
               "src/styles.scss"
