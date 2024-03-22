@@ -1,4 +1,4 @@
-const VERSION = 'v5';
+const VERSION = 'v6';
 
 function log(...arguments) {
   console.log(`${VERSION}: `, ...arguments);
@@ -12,10 +12,10 @@ self.addEventListener('activate', event => {
   log(`📍 Service Worker activated.`, event);
 });
 
-// self.addEventListener('fetch', event => {
-//   // const url = new URL(event.request.url);
-//
-//   log(`⭕ Service Worker fetched.`, event);
-// });
+self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+
+  log(`⭕ Service Worker fetched.`, url);
+});
 
 log(`❎ Service-Worker registered.`);
