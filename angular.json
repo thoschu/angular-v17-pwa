@@ -35,9 +35,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [
-              "src/service-worker-register.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {

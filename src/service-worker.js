@@ -1,25 +1,9 @@
-const VERSION = 'v17';
-
-function log(...arguments) {
-  console.log(`${VERSION}: `, ...arguments);
-}
+const VERSION = 'v1';
 
 self.addEventListener('install', event => {
-  log(`⭐ Service-Worker installation started.`, event);
+  console.log('###');
   const fn = async () => {
-    const request = new Request('offline.html');
-    const response = await fetch(request);
-
-    log(`⭐⭐ Service-Worker installation process loading: offline.html.`, request);
-
-    if(response.status !== 200) {
-      log(`⭐⭐⭐ Service-Worker installation process stopped: offline.html.`, response);
-      throw new Error(`Failed to load offline page: ${response.status}`, { cause: response.statusText });
-    }
-
-    log(`⭐⭐⭐ Service-Worker installation process loaded and cached: offline.html.`, response);
-
-    const cache = await caches.open(`static-app-cache`);
+    const cache = await caches.open(`static-app-cache-${VERSION}`);
 
     return await cache.put(request, response);
   };
@@ -28,32 +12,10 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('activate', event => {
-  log(`📍 Service Worker activated.`, event);
+  console.log('***');
 });
 
 self.addEventListener('fetch', event => {
-  const url = new URL(event.request.url);
-  const fn = async () => {
-    log(`⚠️ Service Worker is fetching: ${url}`, event);
-
-    // let response = await fetch(event.request).catch(error => { });
-
-    return await fetch(event.request)
-      .then(res => {
-        log(`⚠️ Service Worker fetched: ${url}`, event);
-
-        return res;
-      })
-      .catch(async error => {
-        log(`🛟 Service Worker is fetch failure: ${url}. Serving offline page`, error);
-
-        const cache = await caches.open(`static-app-cache`);
-
-        return cache.match('offline.html');
-      });
-  };
-
-  event.respondWith(fn());
+  console.log('...');
+  event.respondWith(async () => {});
 });
-
-log(`❎ Service-Worker registered.`);
