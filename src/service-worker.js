@@ -1,4 +1,4 @@
-const VERSION = 'v16';
+const VERSION = 'v17';
 
 function log(...arguments) {
   console.log(`${VERSION}: `, ...arguments);
@@ -20,6 +20,7 @@ self.addEventListener('install', event => {
     log(`⭐⭐⭐ Service-Worker installation process loaded and cached: offline.html.`, response);
 
     const cache = await caches.open(`static-app-cache`);
+
     return await cache.put(request, response);
   };
 
@@ -33,9 +34,23 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   const fn = async () => {
-    log(`📎 Service Worker is fetching: ${url}`, event);
+    log(`⚠️ Service Worker is fetching: ${url}`, event);
 
-    return fetch(event.request);
+    // let response = await fetch(event.request).catch(error => { });
+
+    return await fetch(event.request)
+      .then(res => {
+        log(`⚠️ Service Worker fetched: ${url}`, event);
+
+        return res;
+      })
+      .catch(async error => {
+        log(`🛟 Service Worker is fetch failure: ${url}. Serving offline page`, error);
+
+        const cache = await caches.open(`static-app-cache`);
+
+        return cache.match('offline.html');
+      });
   };
 
   event.respondWith(fn());

@@ -6,6 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+      @keyframes typing {
+        0% { width: 0; }
+        50% { width: 100%; }
+        60%, 90% { width: 100%; }
+        100% { width: 0; }
+      }
+
+      @keyframes blink-caret {
+        0%, 20% { border-color: transparent; }
+        25%, 50% { border-color: orange; }
+        50.01%, 100% { border-color: transparent; }
+      }
+
+      .typewriter * {
+        overflow: visible;
+        border-right: 1.15em solid orange;
+        white-space: nowrap;
+        margin: 0 auto;
+        letter-spacing: 1.15em;
+        animation: typing 13s steps(40, end) infinite, blink-caret 7s step-end infinite;
+        animation-timing-function: cubic-bezier(.14, .75, .2, 1.01);
+        line-height: 15px;
+      }
+
       body {
         width: 100%;
         min-height: 100vh;
@@ -14,6 +38,7 @@
         padding: 0;
         background: -webkit-linear-gradient(-45deg, #183850 0, #183850 25%, #192C46 50%, #22254C 75%, #22254C 100%);
       }
+
       .wrapper {
         position: absolute;
         top: 50%;
@@ -27,6 +52,7 @@
         transform: translate(-50%, -50%);
         text-align: center;
       }
+
       h1 {
         color: white;
         font-family: arial, serif;
@@ -36,12 +62,14 @@
         line-height: 1rem;
         text-shadow: 0 0 3px white;
       }
+
       h4 {
         color: #f1f1f1;
         font-family: arial, serif;
         font-weight: 300;
         font-size: 16px;
       }
+
       .button {
         display: block;
         margin: 20px 0 0;
@@ -58,10 +86,34 @@
   </head>
   <body>
     <div class="wrapper">
-    <h1>OFFLINE</h1>
-    <h4>Please check your internet connection</h4>
-
-    <a href="." class="button">RETRY</a>
+      <div class="typewriter"><h1 class="typewriter">OFFLINE</h1></div>
+      <h4>Please check your internet connection</h4>
+      <?xml version="1.0" encoding="utf-8"?>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+        <g transform="translate(50 50)">
+          <g transform="scale(0.7)">
+            <g transform="translate(-50 -50)">
+              <g>
+                <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" values="0 50 50;360 50 50" keyTimes="0;1" dur="0.7575757575757576s"></animateTransform>
+                <path fill-opacity="0.8" fill="#e15b64" d="M50 50L50 0A50 50 0 0 1 100 50Z"></path>
+              </g>
+              <g>
+                <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" values="0 50 50;360 50 50" keyTimes="0;1" dur="1.0101010101010102s"></animateTransform>
+                <path fill-opacity="0.8" fill="#f47e60" d="M50 50L50 0A50 50 0 0 1 100 50Z" transform="rotate(90 50 50)"></path>
+              </g>
+              <g>
+                <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" values="0 50 50;360 50 50" keyTimes="0;1" dur="1.5151515151515151s"></animateTransform>
+                <path fill-opacity="0.8" fill="#f8b26a" d="M50 50L50 0A50 50 0 0 1 100 50Z" transform="rotate(180 50 50)"></path>
+              </g>
+              <g>
+                <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" values="0 50 50;360 50 50" keyTimes="0;1" dur="3.0303030303030303s"></animateTransform>
+                <path fill-opacity="0.8" fill="#abbd81" d="M50 50L50 0A50 50 0 0 1 100 50Z" transform="rotate(270 50 50)"></path>
+              </g>
+            </g>
+          </g>
+        </g>
+      </svg>
+      <a href="." class="button">RETRY</a>
     </div>
   </body>
 </html>
