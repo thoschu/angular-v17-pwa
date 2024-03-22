@@ -4,7 +4,7 @@
   "scripts": {
     "*": "npx concurrently \"npm run server\" 'npm run http-server:browser'",
     "ng": "ng",
-    "start": "npm run server & npm run backend & ng serve",
+    "start": "npm run server & npm run backend & ng serve --ssl true --ssl-cert pwa.test+3.pem --ssl-key pwa.test+3-key.pem --verbose",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
