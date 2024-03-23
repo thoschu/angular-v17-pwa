@@ -24,9 +24,18 @@ export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild('container', { static: false, read: ElementRef })
   private readonly container?: ElementRef<HTMLDivElement>;
 
-  @HostListener('document:keydown.escape', ['$event'])
+  @ViewChild('header', { static: false, read: ElementRef })
+  private readonly header?: ElementRef<HTMLHeadingElement>;
+
+  @HostListener('document:keydown.control', ['$event'])
   private onKeydownHandler(event: KeyboardEvent): void {
     console.log(event);
+
+    if(this.header?.nativeElement.classList.contains('hidden')) {
+      this.renderer2.removeClass(this.header?.nativeElement, 'hidden');
+    } else {
+      this.renderer2.addClass(this.header?.nativeElement, 'hidden');
+    }
   }
 
   constructor(
@@ -76,5 +85,11 @@ export class AppComponent implements AfterViewInit, OnInit {
         }
       });
     }
+  }
+
+  protected loadProfile(): void {
+    this.appService.loadProfile().subscribe((profile: Record<string, string>): void => {
+      console.log(profile);
+    });
   }
 }

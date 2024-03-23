@@ -21,6 +21,10 @@ export class AppService {
       );
   }
 
+  public loadProfile(): Observable<Record<string, string>> {
+    return this.httpClient.get<Record<string, string>>('/profile');
+  }
+
   public shuffleArray<T>(array: T[]): T[] {
     let arrayCopy: T[] = [...array];
 

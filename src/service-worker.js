@@ -1,4 +1,4 @@
-const VERSION = 'v0.0.8';
+const VERSION = 'v0.0.13';
 
 const CACHE_NAME = `static-app-cache-${VERSION}`;
 
@@ -6,7 +6,7 @@ self.addEventListener('install', event => {
   console.log(`🔔 service worker ${VERSION} installed`, event);
 
   event.waitUntil(
-    caches
+    self.caches
       .open(CACHE_NAME)
       .then(cache => cache.addAll([
         '/',
@@ -15,21 +15,25 @@ self.addEventListener('install', event => {
         '/main.js',
         '/manifest.webmanifest',
         '/favicon.ico',
-        '/media/dashboard.gif'
-    ]))
+        '/media/dashboard.gif',
+        '/profile'
+      ]))
+      // .then(() => self.skipWaiting())
   );
 });
 
 self.addEventListener('activate',async event => {
   console.log(`❗ service worker ${VERSION} activated`, event);
 
-  const cacheKeys = await caches.keys();
+  const cacheKeys = await self.caches.keys();
 
   cacheKeys.forEach(key => {
     if(key !== CACHE_NAME) {
       caches.delete(key);
     }
   });
+
+  return self.clients.claim(); // early activation of service worker
 });
 
 self.addEventListener('fetch', event => {
@@ -38,14 +42,14 @@ self.addEventListener('fetch', event => {
     const cachedResponse = await cache.match(event.request);
 
     if(cachedResponse) {
-      console.log(`⭐ from cache: ${event.request.url}`, cachedResponse);
+      console.log(`⭐ from service worker ${VERSION} cache: ${event.request.url}`, cachedResponse);
 
       return cachedResponse;
     }
 
     return await fetch(event.request)
       .then(response => {
-        console.log(`📍 from network: ${event.request.url}`, response);
+        console.log(`📍 from service worker ${VERSION} network: ${event.request.url}`, response);
 
         return response;
       })

@@ -25,7 +25,11 @@
 
 :host {
   header {
-    visibility: hidden;
+    text-align: center;
+
+    &.hidden {
+      visibility: hidden;
+    }
   }
 
   aside {

@@ -1,4 +1,7 @@
-<header>{{title}}</header>
+<header class="hidden" #header>
+  <p>{{title}}</p>
+  <button (click)="loadProfile()">LOAD</button>
+</header>
 <main class="main">
   <button [disabled]="disabled" [ngStyle]="{'visibility': disabled ? 'hidden' : 'visible'}" (click)="checkForUpdate()">UPDATE</button>
   <div #container class="typewriter"></div>
