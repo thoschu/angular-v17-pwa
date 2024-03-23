@@ -1,4 +1,4 @@
-const VERSION = 'v0.0.19';
+const VERSION = 'v1.0.0';
 
 const CACHE_NAME = `static-app-cache-${VERSION}`;
 

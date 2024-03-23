@@ -1,4 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
+import { interval } from 'rxjs';
 
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
@@ -13,10 +14,12 @@ bootstrapApplication(AppComponent, appConfig)
 
       serviceWorkerRegistration
         .then((registration: ServiceWorkerRegistration): void => {
-          console.log('→ Service-Worker Registration completed.', registration);
+          console.log('💡 Service-Worker Registration completed.', registration);
+
+          interval(3000).subscribe(async (x: number) => await registration.update());
         })
         .catch((err: Error): void => {
-          console.error('→ Service-Worker Registration Failed.', err);
+          console.error('🔴 Service-Worker Registration Failed.', err);
         });
     }
   })
