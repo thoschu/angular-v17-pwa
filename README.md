@@ -39,8 +39,6 @@ and Worklets enable custom animations and effects.
 
 ## Content
 
-- bar
-
 | Tag name | Branch name               |
 |----------|---------------------------|
 | 1        | main                      |
