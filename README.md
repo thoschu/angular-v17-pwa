@@ -41,11 +41,12 @@ and Worklets enable custom animations and effects.
 
 - bar
 
-| Tag name | Branch name        |
-|----------|--------------------|
-| 1        | main               |
-| 2        | app-shell          |
-| 3        | push-notifications |
+| Tag name | Branch name               |
+|----------|---------------------------|
+| 1        | main                      |
+| 2        | app-shell                 |
+| 3        | push-notifications        |
+| 4        | download-and-installation |
 
 ## Images
 
