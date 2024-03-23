@@ -2,7 +2,7 @@ import {AsyncPipe, NgStyle} from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
-import { Observable } from 'rxjs';
+import {interval, Observable} from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 
 import { AppService } from './app.service';
