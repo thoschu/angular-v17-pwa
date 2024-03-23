@@ -1,4 +1,4 @@
-const VERSION = 'v0.0.13';
+const VERSION = 'v0.0.19';
 
 const CACHE_NAME = `static-app-cache-${VERSION}`;
 
@@ -18,7 +18,7 @@ self.addEventListener('install', event => {
         '/media/dashboard.gif',
         '/profile'
       ]))
-      // .then(() => self.skipWaiting())
+      .then(() => self.skipWaiting())
   );
 });
 
