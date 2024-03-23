@@ -1,5 +1,5 @@
 import {AsyncPipe, NgStyle} from '@angular/common';
-import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 import {interval, Observable} from 'rxjs';
@@ -23,6 +23,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   @ViewChild('container', { static: false, read: ElementRef })
   private readonly container?: ElementRef<HTMLDivElement>;
+
+  @HostListener('document:keydown.escape', ['$event'])
+  private onKeydownHandler(event: KeyboardEvent): void {
+    console.log(event);
+  }
 
   constructor(
     private readonly renderer2: Renderer2,

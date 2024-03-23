@@ -15,8 +15,7 @@ self.addEventListener('install', event => {
         '/main.js',
         '/manifest.webmanifest',
         '/favicon.ico',
-        '/media/dashboard.gif',
-        // '/lorem-ipsum'
+        '/media/dashboard.gif'
     ]))
   );
 });
@@ -32,23 +31,6 @@ self.addEventListener('activate',async event => {
     }
   });
 });
-
-// self.addEventListener('activate',event => {
-//   console.log(`❗ service worker ${VERSION} activated`);
-//
-//   const fn = async () => {
-//     const cacheKeys = await caches.keys();
-//
-//     cacheKeys.forEach(key => {
-//       if(key !== CACHE_NAME) {
-//         caches.delete(key);
-//       }
-//     });
-//   };
-//
-//   fn();
-//
-// });
 
 self.addEventListener('fetch', event => {
   const fn = async () => {

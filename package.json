@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "*": "npx concurrently \"npm run server\" 'npm run http-server:browser'",
+    "i": "npm install",
     "ng": "ng",
     "start": "npm run server & npm run backend & ng serve --ssl true --ssl-cert pwa.test+3.pem --ssl-key pwa.test+3-key.pem --verbose",
     "build": "ng build",
@@ -11,7 +12,11 @@
     "test": "ng test",
     "http-server:browser": "npx http-server ./dist/angular-v17-pwa/browser --cors true --log-ip true -S true -c-1 --cert pwa.test+3.pem --key pwa.test+3-key.pem -P http://localhost:3003",
     "backend": "npx json-server db.json5",
-    "server": "node server.mjs"
+    "server": "node server.mjs",
+    "clean:node_modules": "npx rimraf node_modules",
+    "clean:dist": "npx rimraf dist",
+    "clean:.angular": "npx rimraf .angular",
+    "clean": "npx concurrently \"npm run clean:node_modules\" 'npm run clean:dist' 'npm run clean:.angular'"
   },
   "private": true,
   "dependencies": {
